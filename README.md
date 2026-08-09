@@ -28,10 +28,11 @@ with its official data-dictionary description.
   week. Leave `end_week` blank to build a single week.
 
   This only understands the `meta.yaml` + per-dataset `.md` dictionary format
-  TidyTuesday has used since 2025 (see `R/tt_helpers.R`). Weeks from earlier
-  years use a different layout (a single `readme.md` with all dictionaries
-  embedded) and are skipped, not converted — check the Action's run log for
-  which weeks were actually built.
+  TidyTuesday adopted in late 2025 (first seen the week of 2025-12-02; see
+  `tt_week_is_ready()` in `R/tt_helpers.R`). Earlier weeks have `meta.yaml`
+  and CSVs but no per-dataset dictionary — just one combined `readme.md` —
+  so they're skipped, not converted. Check the Action's run log to see which
+  requested weeks were actually built vs. skipped and why.
 
 Both `check_and_build.R` and `backfill.R` scaffold posts through the same
 `tt_build_post()` function in `R/tt_helpers.R`, so a manually backfilled post

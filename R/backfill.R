@@ -12,10 +12,12 @@
 #   TT_END_WEEK    optional, defaults to TT_START_WEEK (single week)
 #
 # Only understands the meta.yaml + per-dataset .md dictionary format
-# TidyTuesday has used since 2025 — weeks published before that use a
-# different layout (a single readme.md with all data dictionaries embedded)
-# and are silently skipped by tt_build_post(), same as any other
-# not-ready/unsupported week.
+# TidyTuesday adopted in late 2025 (first seen the week of 2025-12-02; weeks
+# before that have meta.yaml but no per-dataset dictionary, just one combined
+# readme.md). tt_week_is_ready() (R/tt_helpers.R) checks for the per-dataset
+# .md files specifically, so older weeks are skipped by tt_build_post(), same
+# as any other not-ready/unsupported week — check this script's log output
+# for which requested weeks were actually built vs. skipped.
 
 suppressPackageStartupMessages({
   library(stringr)
@@ -76,7 +78,22 @@ message(glue(
   "{paste(selected_dates, collapse = ', ')}"
 ))
 
-results <- map_lgl(selected_dates, tt_build_post)
+# One bad week (malformed meta.yaml, a transient network error) shouldn't
+# throw away every other week already built in this run: an uncaught error
+# here would abort the whole script, the workflow's commit step would never
+# run (it doesn't use `if: always()`), and everything built so far in this
+# run would be silently discarded, not just the failing week.
+safe_build_post <- function(date) {
+  tryCatch(
+    tt_build_post(date),
+    error = function(e) {
+      message(glue("Failed to build post for {date}: {conditionMessage(e)}"))
+      FALSE
+    }
+  )
+}
+
+results <- map_lgl(selected_dates, safe_build_post)
 built_dates <- selected_dates[results]
 
 message(glue("Built {length(built_dates)} of {length(selected_dates)} requested week(s)."))

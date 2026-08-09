@@ -6,8 +6,10 @@ name: Backfill past TidyTuesday challenges
 # ISO calendar week number.
 #
 # Note: this pipeline only understands the meta.yaml + per-dataset .md
-# dictionary format TidyTuesday has used since 2025. Weeks from earlier years
-# use a different layout and will be skipped (see R/backfill.R).
+# dictionary format TidyTuesday adopted in late 2025 (first seen the week of
+# 2025-12-02). Earlier weeks use a different layout and will be skipped, not
+# converted — check this run's log to see which requested weeks were
+# actually built (see R/backfill.R).
 
 on:
   workflow_dispatch:

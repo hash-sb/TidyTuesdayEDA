@@ -73,10 +73,18 @@ tt_dataset_basenames <- function(week_files) {
   str_remove(csvs, "\\.csv$")
 }
 
-# A week is only safe to build once it has metadata and at least one dataset.
+# A week is only safe to build once it has metadata, at least one dataset,
+# AND a per-dataset `<name>.md` data dictionary for every dataset — that
+# dictionary is where variable descriptions come from, and it's only been
+# part of the upstream format since late 2025. Older weeks have meta.yaml
+# and CSVs but no per-dataset dictionary (just one combined readme.md), so
+# checking for meta.yaml alone was wrongly treating them as buildable and
+# silently producing posts with every subtitle blank.
 tt_week_is_ready <- function(week_files) {
   names_ <- map_chr(week_files, "name")
-  "meta.yaml" %in% names_ && length(tt_dataset_basenames(week_files)) > 0
+  basenames <- tt_dataset_basenames(week_files)
+  if (!("meta.yaml" %in% names_) || length(basenames) == 0) return(FALSE)
+  all(glue("{basenames}.md") %in% names_)
 }
 
 # ---- Post scaffolding (used by R/check_and_build.R and R/backfill.R) -----
