@@ -28,21 +28,17 @@ The [{ecotourism}](https://vahdatjavad.github.io/ecotourism) package provides ad
 **Original article:** [Getting Started with the {ecotourism} Package](https://vahdatjavad.github.io/ecotourism/articles/getting-started.html)  
 **Curated by:** Nicola Rennie  
 
-## Occurrences
-
 ```{r}
 #| output: asis
-tt_dataset_section("2026-07-28", "occurrences")
+tt_dataset_section("2026-07-28", "occurrences", "Occurrences")
 ```
-## Tourism
 
 ```{r}
 #| output: asis
-tt_dataset_section("2026-07-28", "tourism")
+tt_dataset_section("2026-07-28", "tourism", "Tourism")
 ```
-## Weather
 
 ```{r}
 #| output: asis
-tt_dataset_section("2026-07-28", "weather")
+tt_dataset_section("2026-07-28", "weather", "Weather")
 ```

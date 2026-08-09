@@ -28,9 +28,7 @@ Near-death experiences are reported by 10–23% of cardiac arrest survivors in p
 **Original article:** [Near Death Experience Research Foundation](https://nderf.org/)  
 **Curated by:** Tony Galvan, Golden Dome Data Science  
 
-## Nde Experiences
-
 ```{r}
 #| output: asis
-tt_dataset_section("2026-07-21", "nde_experiences")
+tt_dataset_section("2026-07-21", "nde_experiences", "Nde Experiences")
 ```
