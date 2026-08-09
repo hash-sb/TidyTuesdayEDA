@@ -156,13 +156,16 @@ tt_build_post <- function(date) {
     source_lines <- c(source_lines, glue("**Curated by:** {meta$credit$post}  "))
   }
 
+  # The "## <heading>" for each dataset is emitted by tt_dataset_section()
+  # itself (not written here as static markdown) so it can include the
+  # dataset's row/column count, which is only known once the CSV is
+  # actually fetched at render time.
   dataset_sections <- map_chr(basenames, function(basename) {
     heading <- str_to_title(str_replace_all(basename, "_", " "))
     glue(
-      "## {heading}\n\n",
       "```{{r}}\n",
       "#| output: asis\n",
-      "tt_dataset_section(\"{date}\", \"{basename}\")\n",
+      "tt_dataset_section(\"{date}\", \"{basename}\", \"{heading}\")\n",
       "```\n"
     )
   })
@@ -251,10 +254,10 @@ theme_tt <- function() {
   theme_minimal(base_size = 12) %+replace%
     theme(
       plot.title = element_text(face = "bold", size = rel(1.15), colour = "#0b0b0b",
-                                 margin = margin(b = 4), hjust = 0),
+                                 margin = margin(b = 4), hjust = 0, lineheight = 1.1),
       plot.subtitle = element_text(colour = "#52514e", size = rel(0.95),
-                                    margin = margin(b = 10), hjust = 0),
-      plot.caption = element_text(colour = "#898781", size = rel(0.75), hjust = 0),
+                                    margin = margin(b = 10), hjust = 0, lineheight = 1.15),
+      plot.caption = element_text(colour = "#898781", size = rel(0.75), hjust = 0, lineheight = 1.1),
       axis.title = element_text(colour = "#52514e", size = rel(0.85)),
       axis.text = element_text(colour = "#898781"),
       panel.grid.major = element_line(colour = "#e1e0d9", linewidth = 0.3),
@@ -272,6 +275,29 @@ tt_emit_note <- function(msg) {
   cat("\n\n::: {.tt-note}\n", msg, "\n:::\n\n", sep = "")
 }
 
+# Subtitles are variable descriptions pulled verbatim from TidyTuesday's data
+# dictionary and can run to a full sentence; ggplot doesn't auto-wrap title/
+# subtitle text to the plot width, so long ones get clipped/overflow unless
+# wrapped into explicit line breaks first.
+TT_WRAP_WIDTH <- 90
+
+tt_wrap <- function(x, width = TT_WRAP_WIDTH) {
+  if (is.null(x)) return(NULL)
+  str_wrap(x, width = width)
+}
+
+tt_fmt_num <- function(x) {
+  if (is.na(x)) return("NA")
+  format(signif(x, 3), big.mark = ",", scientific = FALSE, trim = TRUE)
+}
+
+# NULL (not "") when there's nothing missing, so callers can drop it from a
+# caption with c(...) without leaving a stray separator.
+tt_missing_stat <- function(n_na, n) {
+  if (n_na == 0) return(NULL)
+  glue("{round(100 * n_na / n)}% missing ({comma(n_na)} of {comma(n)})")
+}
+
 tt_render_variable <- function(x, variable, description) {
   n <- length(x)
   n_na <- sum(is.na(x))
@@ -283,25 +309,37 @@ tt_render_variable <- function(x, variable, description) {
   cls <- class(x)[1]
   p <- NULL
   note <- NULL
+  missing_stat <- tt_missing_stat(n_na, n)
 
   if (cls %in% c("integer", "numeric", "double")) {
     d <- data.frame(x = x)
+    stats <- glue(
+      "Mean: {tt_fmt_num(mean(x, na.rm = TRUE))} · ",
+      "Median: {tt_fmt_num(median(x, na.rm = TRUE))} · ",
+      "SD: {tt_fmt_num(sd(x, na.rm = TRUE))}"
+    )
+    caption <- paste(c(stats, missing_stat), collapse = " · ")
     p <- ggplot(d, aes(x = x)) +
       geom_histogram(fill = TT_BLUE, bins = 30, na.rm = TRUE) +
-      labs(title = variable, subtitle = description, x = NULL, y = "count") +
+      labs(title = variable, subtitle = tt_wrap(description), x = NULL, y = "count",
+           caption = tt_wrap(caption)) +
       theme_tt()
   } else if (inherits(x, "Date") || inherits(x, "POSIXct")) {
     d <- data.frame(x = x)
+    stats <- glue("Range: {format(min(x, na.rm = TRUE))} to {format(max(x, na.rm = TRUE))}")
+    caption <- paste(c(stats, missing_stat), collapse = " · ")
     p <- ggplot(d, aes(x = x)) +
       geom_histogram(fill = TT_BLUE, bins = 30, na.rm = TRUE) +
-      labs(title = variable, subtitle = description, x = NULL, y = "count") +
+      labs(title = variable, subtitle = tt_wrap(description), x = NULL, y = "count",
+           caption = tt_wrap(caption)) +
       theme_tt()
   } else if (cls == "logical") {
     d <- data.frame(x = factor(ifelse(is.na(x), "NA", as.character(x)),
                                 levels = c("TRUE", "FALSE", "NA")))
     p <- ggplot(d, aes(x = x)) +
       geom_bar(fill = TT_BLUE, na.rm = TRUE) +
-      labs(title = variable, subtitle = description, x = NULL, y = "count") +
+      labs(title = variable, subtitle = tt_wrap(description), x = NULL, y = "count",
+           caption = tt_wrap(missing_stat)) +
       theme_tt()
   } else if (cls %in% c("character", "factor")) {
     xc <- as.character(x)
@@ -315,21 +353,42 @@ tt_render_variable <- function(x, variable, description) {
       )
     } else {
       counts <- sort(table(xc), decreasing = TRUE)
-      caption <- NULL
+      mode_val <- names(counts)[1]
+      cat_stats <- glue("{comma(n_unique)} categories · Most common: \"{mode_val}\"")
+
+      trunc_note <- NULL
       if (length(counts) > 30) {
         total_categories <- length(counts)
         top <- counts[1:15]
         other_n <- sum(counts[-(1:15)])
         counts <- c(top, `(other)` = other_n)
-        caption <- glue("Top 15 of {total_categories} categories shown; the rest are grouped as \"(other)\".")
+        trunc_note <- glue("top 15 of {total_categories} categories shown, rest grouped as \"(other)\"")
       }
+      caption <- paste(c(cat_stats, trunc_note, missing_stat), collapse = " · ")
+
       d <- data.frame(level = factor(names(counts), levels = names(counts)),
                        n = as.integer(counts))
-      p <- ggplot(d, aes(x = level, y = n)) +
-        geom_col(fill = TT_BLUE) +
-        labs(title = variable, subtitle = description, x = NULL, y = "count", caption = caption) +
-        theme_tt() +
-        theme(axis.text.x = element_text(angle = 40, hjust = 1))
+
+      # Long category labels overlap/get clipped when rotated under a
+      # vertical bar chart, so switch to horizontal bars (labels on the
+      # y-axis, read left to right) instead.
+      long_labels <- max(nchar(as.character(d$level))) > 15
+
+      if (long_labels) {
+        d$level <- factor(d$level, levels = rev(levels(d$level)))
+        p <- ggplot(d, aes(x = n, y = level)) +
+          geom_col(fill = TT_BLUE) +
+          labs(title = variable, subtitle = tt_wrap(description), x = "count", y = NULL,
+               caption = tt_wrap(caption)) +
+          theme_tt()
+      } else {
+        p <- ggplot(d, aes(x = level, y = n)) +
+          geom_col(fill = TT_BLUE) +
+          labs(title = variable, subtitle = tt_wrap(description), x = NULL, y = "count",
+               caption = tt_wrap(caption)) +
+          theme_tt() +
+          theme(axis.text.x = element_text(angle = 40, hjust = 1))
+      }
     }
   } else {
     note <- glue("**{variable}** — unsupported column type (`{cls}`); distribution not shown.")
@@ -345,16 +404,22 @@ tt_render_variable <- function(x, variable, description) {
 
 # ---- One dataset section: called directly from a generated post ----------
 
-tt_dataset_section <- function(date, basename) {
+# Emits the "## <heading>" itself (rather than the qmd template writing it as
+# static markdown) so the row x column count can be appended right after the
+# title, and so it's always preceded by a blank line — guaranteeing it's
+# recognized as a real H2 regardless of whatever content came right before it
+# in the rendered output.
+tt_dataset_section <- function(date, basename, heading) {
   df <- tryCatch(tt_read_csv(date, basename), error = function(e) NULL)
   if (is.null(df)) {
+    cat(glue("\n\n## {heading}\n\n"))
     tt_emit_note(glue("Could not load `{basename}.csv` for {date}."))
     return(invisible(NULL))
   }
 
   dict <- tt_read_dictionary(date, basename)
 
-  cat(glue("\n\n{comma(nrow(df))} rows x {ncol(df)} columns.\n\n"))
+  cat(glue("\n\n## {heading} ({comma(nrow(df))}x{ncol(df)})\n\n"))
 
   for (variable in names(df)) {
     description <- tt_variable_description(dict, variable)
