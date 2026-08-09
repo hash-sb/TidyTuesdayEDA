@@ -1,6 +1,7 @@
 project:
   type: website
   output-dir: _site
+  execute-dir: project
 
 website:
   title: "TidyTuesday EDA"
@@ -33,4 +34,3 @@ execute:
   echo: false
   warning: false
   message: false
-  execute-dir: project
