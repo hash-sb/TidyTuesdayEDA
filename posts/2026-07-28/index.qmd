@@ -1,0 +1,48 @@
+---
+title: Ecotourism
+date: '2026-07-28'
+categories:
+- Occurrences
+- Tourism
+- Weather
+description: Getting Started with the {ecotourism} Package
+---
+
+```{r}
+#| include: false
+source("R/tt_helpers.R")
+```
+
+This week we're exploring ecotourism! The [{ecotourism}](https://vahdatjavad.github.io/ecotourism) R package provides tools to analyse ecological observation data alongside weather conditions and tourism data.
+
+> The goal of `ecotourism` is to provide clean, ready-to-use datasets for example analyses in teaching, demos, and reproducible workflows.
+
+* Under which weather conditions are you most likely to observe a Gouldian finch?
+* How does weather affect tourism numbers in each region?
+* How do observations of the different animals relate to numbers of tourists?
+
+The [{ecotourism}](https://vahdatjavad.github.io/ecotourism) package provides additional datasets and ideas for analsyis. Remember to cite the package with `citation("ecotourism")`!
+
+
+**Data source:** [{ecotourism} R package](https://github.com/vahdatjavad/ecotourism/)  
+**Original article:** [Getting Started with the {ecotourism} Package](https://vahdatjavad.github.io/ecotourism/articles/getting-started.html)  
+**Curated by:** Nicola Rennie  
+
+## Occurrences
+
+```{r}
+#| output: asis
+tt_dataset_section("2026-07-28", "occurrences")
+```
+## Tourism
+
+```{r}
+#| output: asis
+tt_dataset_section("2026-07-28", "tourism")
+```
+## Weather
+
+```{r}
+#| output: asis
+tt_dataset_section("2026-07-28", "weather")
+```
