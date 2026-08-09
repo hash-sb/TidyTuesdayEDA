@@ -99,9 +99,7 @@ ggsave(
 **Original article:** [The mountain men behind Lesotho’s wool wealth: More than 80,000 herders tend the country’s sheep and goats](https://groundup.org.za/article/the-mountain-men-behind-lesothos-wool-wealth/)  
 **Curated by:** Ntobeko Sosibo  
 
-## Basotho Wool
-
 ```{r}
 #| output: asis
-tt_dataset_section("2026-08-04", "basotho_wool")
+tt_dataset_section("2026-08-04", "basotho_wool", "Basotho Wool")
 ```
