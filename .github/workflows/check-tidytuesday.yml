@@ -15,7 +15,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: check-tidytuesday
+  group: tidytuesday-content
   cancel-in-progress: false
 
 jobs:

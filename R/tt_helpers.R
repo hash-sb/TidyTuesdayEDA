@@ -12,6 +12,7 @@ suppressPackageStartupMessages({
   library(purrr)
   library(glue)
   library(scales)
+  library(yaml)
 })
 
 TT_REPO <- "rfordatascience/tidytuesday"
@@ -76,6 +77,96 @@ tt_dataset_basenames <- function(week_files) {
 tt_week_is_ready <- function(week_files) {
   names_ <- map_chr(week_files, "name")
   "meta.yaml" %in% names_ && length(tt_dataset_basenames(week_files)) > 0
+}
+
+# ---- Post scaffolding (used by R/check_and_build.R and R/backfill.R) -----
+
+# Scaffolds posts/<date>/index.qmd for a given upstream week, unless it
+# already exists or the week isn't fully populated upstream yet. Returns
+# TRUE if a post was written, FALSE if it was skipped (already existed / not
+# ready / not found upstream) — never errors on a merely-missing week, so a
+# caller can loop this over many dates.
+tt_build_post <- function(date) {
+  post_dir <- file.path("posts", date)
+  if (dir.exists(post_dir)) {
+    message(glue("Week {date} already has a post at {post_dir}/. Skipping."))
+    return(invisible(FALSE))
+  }
+
+  week_files <- tryCatch(tt_week_files(date), error = function(e) NULL)
+  if (is.null(week_files) || !tt_week_is_ready(week_files)) {
+    message(glue("Week {date} isn't available upstream, or isn't fully populated yet ",
+                  "(no meta.yaml/.csv — older TidyTuesday weeks used a different format ",
+                  "that this pipeline doesn't parse). Skipping."))
+    return(invisible(FALSE))
+  }
+
+  basenames <- tt_dataset_basenames(week_files)
+  message(glue("Building post for {date}: datasets = {paste(basenames, collapse = ', ')}"))
+
+  meta <- tryCatch(read_yaml(tt_raw_url(date, "meta.yaml")), error = function(e) list())
+  intro_text <- tryCatch(
+    paste(readLines(tt_raw_url(date, "intro.md"), warn = FALSE), collapse = "\n"),
+    error = function(e) ""
+  )
+
+  title <- as.character(meta$title %||% glue("TidyTuesday {date}"))
+
+  frontmatter <- list(
+    title = title,
+    date = date,
+    categories = as.list(str_to_title(str_replace_all(basenames, "_", " ")))
+  )
+  if (!is.null(meta$article$title)) {
+    frontmatter$description <- meta$article$title
+  }
+  front_yaml <- as.yaml(frontmatter)
+
+  source_lines <- c()
+  if (!is.null(meta$data_source$title)) {
+    src <- meta$data_source$title
+    if (!is.null(meta$data_source$url)) {
+      src <- glue("[{src}]({meta$data_source$url})")
+    }
+    source_lines <- c(source_lines, glue("**Data source:** {src}  "))
+  }
+  if (!is.null(meta$article$title)) {
+    art <- meta$article$title
+    if (!is.null(meta$article$url)) {
+      art <- glue("[{art}]({meta$article$url})")
+    }
+    source_lines <- c(source_lines, glue("**Original article:** {art}  "))
+  }
+  if (!is.null(meta$credit$post)) {
+    source_lines <- c(source_lines, glue("**Curated by:** {meta$credit$post}  "))
+  }
+
+  dataset_sections <- map_chr(basenames, function(basename) {
+    heading <- str_to_title(str_replace_all(basename, "_", " "))
+    glue(
+      "## {heading}\n\n",
+      "```{{r}}\n",
+      "#| output: asis\n",
+      "tt_dataset_section(\"{date}\", \"{basename}\")\n",
+      "```\n"
+    )
+  })
+
+  body <- glue(
+    "---\n{front_yaml}---\n\n",
+    "```{{r}}\n",
+    "#| include: false\n",
+    "source(\"R/tt_helpers.R\")\n",
+    "```\n\n",
+    "{if (nzchar(intro_text)) intro_text else ''}\n\n",
+    "{paste(source_lines, collapse = '\\n')}\n\n",
+    "{paste(dataset_sections, collapse = '\\n')}"
+  )
+
+  dir.create(post_dir, recursive = TRUE, showWarnings = FALSE)
+  writeLines(body, file.path(post_dir, "index.qmd"))
+  message(glue("Wrote {post_dir}/index.qmd"))
+  invisible(TRUE)
 }
 
 # ---- Data dictionary parsing --------------------------------------------

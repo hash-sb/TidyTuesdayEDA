@@ -19,6 +19,23 @@ with its official data-dictionary description.
   `R/tt_helpers.R`), so no raw CSVs are stored in this repo — only the
   generated `.qmd` files and Quarto's `_freeze/` render cache (kept so
   already-built weeks aren't re-downloaded/re-rendered on every run).
+- **`.github/workflows/backfill-tidytuesday.yml`** is manual-only
+  (**Actions → Backfill past TidyTuesday challenges → Run workflow**). It
+  prompts for a `year` and a `start_week`/`end_week` range and builds a post
+  for each week in that range, the same way the weekly poller does. "Week N"
+  means the Nth weekly data folder published that year (date order), matching
+  the numbering in TidyTuesday's own per-year readme — not an ISO calendar
+  week. Leave `end_week` blank to build a single week.
+
+  This only understands the `meta.yaml` + per-dataset `.md` dictionary format
+  TidyTuesday has used since 2025 (see `R/tt_helpers.R`). Weeks from earlier
+  years use a different layout (a single `readme.md` with all dictionaries
+  embedded) and are skipped, not converted — check the Action's run log for
+  which weeks were actually built.
+
+Both `check_and_build.R` and `backfill.R` scaffold posts through the same
+`tt_build_post()` function in `R/tt_helpers.R`, so a manually backfilled post
+and a normally-detected weekly post are identical in structure.
 
 ## Local development
 
