@@ -309,6 +309,7 @@ tt_render_variable <- function(x, variable, description) {
   cls <- class(x)[1]
   p <- NULL
   note <- NULL
+  fig_height <- NULL
   missing_stat <- tt_missing_stat(n_na, n)
 
   if (cls %in% c("integer", "numeric", "double")) {
@@ -366,35 +367,37 @@ tt_render_variable <- function(x, variable, description) {
       }
       caption <- paste(c(cat_stats, trunc_note, missing_stat), collapse = " · ")
 
-      d <- data.frame(level = factor(names(counts), levels = names(counts)),
+      # Always horizontal (labels on the y-axis, read left to right, largest
+      # on top) rather than switching to vertical bars for short labels --
+      # one consistent chart shape for every categorical variable on the
+      # site, instead of the shape varying per-variable by label length.
+      d <- data.frame(level = factor(names(counts), levels = rev(names(counts))),
                        n = as.integer(counts))
 
-      # Long category labels overlap/get clipped when rotated under a
-      # vertical bar chart, so switch to horizontal bars (labels on the
-      # y-axis, read left to right) instead.
-      long_labels <- max(nchar(as.character(d$level))) > 15
+      # Vertical space scales with the number of bars shown (up to 16, after
+      # top-15-plus-other truncation) so bars stay a consistent thickness
+      # instead of a 3-category chart and a 16-category chart rendering at
+      # the same fixed height.
+      fig_height <- max(2.5, 0.9 + 0.35 * nrow(d))
 
-      if (long_labels) {
-        d$level <- factor(d$level, levels = rev(levels(d$level)))
-        p <- ggplot(d, aes(x = n, y = level)) +
-          geom_col(fill = TT_BLUE) +
-          labs(title = variable, subtitle = tt_wrap(description), x = "count", y = NULL,
-               caption = tt_wrap(caption)) +
-          theme_tt()
-      } else {
-        p <- ggplot(d, aes(x = level, y = n)) +
-          geom_col(fill = TT_BLUE) +
-          labs(title = variable, subtitle = tt_wrap(description), x = NULL, y = "count",
-               caption = tt_wrap(caption)) +
-          theme_tt() +
-          theme(axis.text.x = element_text(angle = 40, hjust = 1))
-      }
+      p <- ggplot(d, aes(x = n, y = level)) +
+        geom_col(fill = TT_BLUE) +
+        labs(title = variable, subtitle = tt_wrap(description), x = "count", y = NULL,
+             caption = tt_wrap(caption)) +
+        theme_tt()
     }
   } else {
     note <- glue("**{variable}** — unsupported column type (`{cls}`); distribution not shown.")
   }
 
   if (!is.null(p)) {
+    if (!is.null(fig_height)) {
+      # Overrides the figure height for just this plot -- knitr reads
+      # opts_current at capture time, so this only affects the very next
+      # plot printed in the chunk, not the whole loop tt_dataset_section()
+      # runs through.
+      knitr::opts_current$set(fig.height = fig_height)
+    }
     print(p)
   } else if (!is.null(note)) {
     tt_emit_note(note)
