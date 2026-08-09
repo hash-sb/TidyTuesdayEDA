@@ -1,9 +1,9 @@
 name: Backfill past TidyTuesday challenges
 
-# Manual only. Builds posts for a range of past TidyTuesday weeks in a given
-# year. "Week N" is the Nth weekly data folder published that year, in date
-# order — the same numbering TidyTuesday's own per-year readme uses, not an
-# ISO calendar week number.
+# Manual only. Builds a post for every upstream TidyTuesday week whose own
+# published date falls within [start_date, end_date] — the dates you provide
+# are just the window's edges, they don't need to land exactly on a week's
+# folder date.
 #
 # Note: this pipeline only understands the meta.yaml + per-dataset .md
 # dictionary format TidyTuesday adopted in late 2025 (first seen the week of
@@ -14,17 +14,12 @@ name: Backfill past TidyTuesday challenges
 on:
   workflow_dispatch:
     inputs:
-      year:
-        description: "Year to backfill, e.g. 2024"
+      start_date:
+        description: "Backfill from this date, inclusive (YYYY-MM-DD, e.g. 2025-06-01)"
         required: true
         type: string
-      start_week:
-        description: "First week number to build (1 = earliest week of that year)"
-        required: true
-        type: string
-        default: "1"
-      end_week:
-        description: "Last week number to build, inclusive. Leave blank to build just start_week."
+      end_date:
+        description: "Backfill through this date, inclusive (YYYY-MM-DD). Leave blank to build just the single week covering start_date."
         required: false
         type: string
 
@@ -51,12 +46,11 @@ jobs:
       - name: Install R dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
 
-      - name: Backfill selected weeks
+      - name: Backfill selected date range
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TT_YEAR: ${{ inputs.year }}
-          TT_START_WEEK: ${{ inputs.start_week }}
-          TT_END_WEEK: ${{ inputs.end_week }}
+          TT_START_DATE: ${{ inputs.start_date }}
+          TT_END_DATE: ${{ inputs.end_date }}
         run: Rscript R/backfill.R
 
       - name: Commit and push backfilled posts
@@ -67,6 +61,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No new posts to commit."
           else
-            git commit -m "Backfill TidyTuesday posts: ${BACKFILL_SUMMARY:-$TT_YEAR}"
+            git commit -m "Backfill TidyTuesday posts: ${BACKFILL_SUMMARY:-$TT_START_DATE}"
             git push
           fi

@@ -21,11 +21,13 @@ with its official data-dictionary description.
   already-built weeks aren't re-downloaded/re-rendered on every run).
 - **`.github/workflows/backfill-tidytuesday.yml`** is manual-only
   (**Actions → Backfill past TidyTuesday challenges → Run workflow**). It
-  prompts for a `year` and a `start_week`/`end_week` range and builds a post
-  for each week in that range, the same way the weekly poller does. "Week N"
-  means the Nth weekly data folder published that year (date order), matching
-  the numbering in TidyTuesday's own per-year readme — not an ISO calendar
-  week. Leave `end_week` blank to build a single week.
+  prompts for a `start_date`/`end_date` (YYYY-MM-DD) and builds a post for
+  every upstream week whose own published date falls within that range,
+  inclusive, the same way the weekly poller does. The dates are just the
+  window's edges — they don't need to land exactly on a week's folder date,
+  so e.g. `2025-06-01` to `2025-08-01` picks up every week published in
+  between. Leave `end_date` blank to build just the single week covering
+  `start_date`.
 
   This only understands the `meta.yaml` + per-dataset `.md` dictionary format
   TidyTuesday adopted in late 2025 (first seen the week of 2025-12-02; see

@@ -43,19 +43,26 @@ tt_raw_url <- function(date, filename) {
   glue("https://raw.githubusercontent.com/{TT_REPO}/main/data/{year}/{date}/{filename}")
 }
 
-# ---- Week discovery (used by R/check_and_build.R) -----------------------
+# ---- Week discovery (used by R/check_and_build.R and R/backfill.R) -------
 
-# Newest YYYY-MM-DD week folder in the upstream repo that is not in the
-# future, checking the current year and falling back to the previous year
-# (handles the turn of a new year before that year's folder exists).
+# All YYYY-MM-DD week folder names published under data/<year> upstream,
+# sorted ascending. Returns character(0) if the year doesn't exist upstream
+# (e.g. before TidyTuesday started, or a typo) rather than erroring, so
+# callers can just combine results across several years.
+tt_list_week_dates <- function(year) {
+  entries <- tryCatch(tt_gh_api(glue("data/{year}")), error = function(e) NULL)
+  if (is.null(entries)) return(character())
+  dirs <- keep(entries, ~ .x$type == "dir" && str_detect(.x$name, "^\\d{4}-\\d{2}-\\d{2}$"))
+  sort(map_chr(dirs, "name"))
+}
+
+# Newest week folder in the upstream repo that is not in the future,
+# checking the current year and falling back to the previous year (handles
+# the turn of a new year before that year's folder exists).
 tt_latest_available_date <- function() {
   this_year <- as.integer(format(Sys.Date(), "%Y"))
   for (yr in c(this_year, this_year - 1)) {
-    entries <- tryCatch(tt_gh_api(glue("data/{yr}")), error = function(e) NULL)
-    if (is.null(entries)) next
-
-    dirs <- keep(entries, ~ .x$type == "dir" && str_detect(.x$name, "^\\d{4}-\\d{2}-\\d{2}$"))
-    dates <- map_chr(dirs, "name")
+    dates <- tt_list_week_dates(yr)
     dates <- dates[as.Date(dates) <= Sys.Date()]
     if (length(dates) > 0) return(max(dates))
   }
