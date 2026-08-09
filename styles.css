@@ -1,0 +1,24 @@
+/* Minimal touch-ups on top of the "cosmo" Quarto theme */
+
+body {
+  color: #0b0b0b;
+}
+
+.quarto-title-banner {
+  background-color: #fcfcfb;
+}
+
+.dataset-section {
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e1e0d9;
+}
+
+.tt-note {
+  color: #52514e;
+  font-style: italic;
+}
+
+.listing-date {
+  color: #898781;
+}

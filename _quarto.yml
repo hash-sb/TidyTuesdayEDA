@@ -1,0 +1,36 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "TidyTuesday EDA"
+  description: "Automated exploratory distributions for every TidyTuesday challenge"
+  # Fill this in once GitHub Pages is live, e.g. https://<user>.github.io/<repo>/
+  # (used for the RSS feed / social preview links; harmless if left unset).
+  # site-url: "https://<user>.github.io/<repo>/"
+  navbar:
+    left:
+      - href: index.qmd
+        text: "Challenges"
+      - href: about.qmd
+        text: "About"
+    right:
+      - icon: github
+        href: https://github.com/rfordatascience/tidytuesday
+        text: "TidyTuesday upstream"
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    toc-location: right
+    grid:
+      body-width: 950px
+
+execute:
+  freeze: auto
+  echo: false
+  warning: false
+  message: false
+  execute-dir: project

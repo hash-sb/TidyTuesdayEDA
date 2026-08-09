@@ -1,0 +1,21 @@
+Package: tidytuesdayeda
+Title: TidyTuesday EDA Site Dependencies
+Version: 0.0.0.9000
+Type: Package
+Description: Not a real package. Its Imports list exists so
+    r-lib/actions/setup-r-dependencies can install and cache the packages
+    used by R/tt_helpers.R, R/check_and_build.R, and the generated
+    posts/*/index.qmd files.
+License: MIT
+Imports:
+    glue,
+    ggplot2,
+    httr2,
+    knitr,
+    purrr,
+    readr,
+    rmarkdown,
+    scales,
+    stringr,
+    yaml
+Encoding: UTF-8

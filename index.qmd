@@ -1,0 +1,18 @@
+---
+title: "TidyTuesday EDA"
+listing:
+  contents: posts
+  type: default
+  sort: "date desc"
+  date-format: "MMMM D, YYYY"
+  categories: false
+page-layout: full
+title-block-banner: false
+---
+
+A new page appears here automatically whenever
+[TidyTuesday](https://github.com/rfordatascience/tidytuesday) publishes a new
+weekly challenge. Every dataset in a challenge gets its own section, and every
+variable in a dataset gets a distribution plot — histogram or bar chart
+depending on its type — titled with the variable name and subtitled with its
+official description. See [About](about.qmd) for how the automation works.

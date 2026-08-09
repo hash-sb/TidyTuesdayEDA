@@ -1,0 +1,30 @@
+---
+title: "About"
+---
+
+## What this is
+
+This site is an automatically generated exploratory-data-analysis portfolio
+built on top of [TidyTuesday](https://github.com/rfordatascience/tidytuesday),
+the weekly R community data project. Every week, TidyTuesday publishes one or
+more datasets along with a data dictionary describing each variable.
+
+## How it's built
+
+1. A [GitHub Actions workflow](https://github.com/features/actions) polls the
+   upstream TidyTuesday repository on a schedule, looking for a weekly data
+   folder that hasn't been turned into a page yet.
+2. When it finds one, it scaffolds a new page (`posts/<date>/index.qmd`) with
+   one section per dataset in that week's release.
+3. [Quarto](https://quarto.org) renders each page: for every variable in every
+   dataset, it downloads the data straight from TidyTuesday, reads the
+   variable's official description from the dataset's data dictionary, and
+   draws a distribution plot — a histogram for numeric/date variables, a bar
+   chart for categorical/logical variables — titled with the variable name and
+   subtitled with its description.
+4. The rendered site is published to GitHub Pages. Any change pushed to the
+   repository — a new page or a manual edit — triggers a rebuild and
+   redeploy automatically.
+
+The full source, including the R code that does the fetching, parsing, and
+plotting, lives in this repository under `R/`.
