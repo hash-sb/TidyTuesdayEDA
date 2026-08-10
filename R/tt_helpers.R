@@ -298,6 +298,19 @@ tt_missing_stat <- function(n_na, n) {
   glue("{round(100 * n_na / n)}% missing ({comma(n_na)} of {comma(n)})")
 }
 
+TT_LABEL_WIDTH <- 20
+
+# Fixed-width category axis labels: right-aligned within TT_LABEL_WIDTH
+# characters (space-padded on the left), truncated with an ellipsis if
+# longer -- every categorical chart's labels occupy exactly the same width
+# instead of each chart's left edge being as ragged as its longest category
+# name happens to be. Only formats the axis label; caption text (e.g. "Most
+# common: ...") keeps the real, untruncated category name.
+tt_fixed_width_label <- function(x, width = TT_LABEL_WIDTH) {
+  x <- str_trunc(x, width = width, side = "right", ellipsis = "...")
+  str_pad(x, width = width, side = "left")
+}
+
 tt_render_variable <- function(x, variable, description) {
   n <- length(x)
   n_na <- sum(is.na(x))
@@ -371,8 +384,17 @@ tt_render_variable <- function(x, variable, description) {
       # on top) rather than switching to vertical bars for short labels --
       # one consistent chart shape for every categorical variable on the
       # site, instead of the shape varying per-variable by label length.
-      d <- data.frame(level = factor(names(counts), levels = rev(names(counts))),
-                       n = as.integer(counts))
+      # factor()'s levels must be unique, but two different category names
+      # can truncate to the identical fixed-width label -- e.g. "United
+      # States of America" and "United States of Europe" both collapse to
+      # "United States of ...". Keying the factor on row position (always
+      # unique) rather than the label text itself avoids that crash; labels=
+      # supplies the (possibly duplicated) display text separately.
+      labels <- tt_fixed_width_label(names(counts))
+      d <- data.frame(
+        level = factor(seq_along(labels), levels = rev(seq_along(labels)), labels = rev(labels)),
+        n = as.integer(counts)
+      )
 
       # Vertical space scales with the number of bars shown (up to 16, after
       # top-15-plus-other truncation) so bars stay a consistent thickness
@@ -384,7 +406,11 @@ tt_render_variable <- function(x, variable, description) {
         geom_col(fill = TT_BLUE) +
         labs(title = variable, subtitle = tt_wrap(description), x = "count", y = NULL,
              caption = tt_wrap(caption)) +
-        theme_tt()
+        theme_tt() +
+        # Fixed-width padding only lines up visually under a monospace font --
+        # under the site's normal proportional font, equal character counts
+        # don't render to equal pixel widths.
+        theme(axis.text.y = element_text(family = "mono"))
     }
   } else {
     note <- glue("**{variable}** — unsupported column type (`{cls}`); distribution not shown.")
