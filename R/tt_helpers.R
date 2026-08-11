@@ -135,6 +135,16 @@ tt_build_post <- function(date) {
   if (!is.null(meta$article$title)) {
     frontmatter$description <- meta$article$title
   }
+  # meta.yaml often ships one sample community visualization for the week;
+  # use it as this post's card thumbnail on the grid listing (index.qmd) if
+  # present. Not every week has one -- those cards just render without an
+  # image, still fine in the grid layout.
+  if (!is.null(meta$images) && length(meta$images) > 0 && !is.null(meta$images[[1]]$file)) {
+    frontmatter$image <- tt_raw_url(date, meta$images[[1]]$file)
+    if (!is.null(meta$images[[1]]$alt)) {
+      frontmatter[["image-alt"]] <- meta$images[[1]]$alt
+    }
+  }
   front_yaml <- as.yaml(frontmatter)
 
   source_lines <- c()

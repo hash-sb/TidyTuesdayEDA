@@ -22,3 +22,33 @@ body {
 .listing-date {
   color: #898781;
 }
+
+/* Card polish for the landing page grid (Quarto's `listing: type: grid`,
+   which renders each post as a Bootstrap .card). Selectors are duplicated
+   as both combined- and descendant-class forms since the exact generated
+   markup wasn't verified against a local render. */
+.quarto-grid-item.card,
+.quarto-grid-item .card {
+  border: 1px solid #e1e0d9;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(11, 11, 11, 0.06);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.quarto-grid-item.card:hover,
+.quarto-grid-item .card:hover {
+  box-shadow: 0 6px 16px rgba(11, 11, 11, 0.12);
+  transform: translateY(-2px);
+}
+
+.quarto-grid-item .card-img-top,
+.quarto-grid-item .thumbnail-image img {
+  object-fit: cover;
+}
+
+.quarto-grid-item .listing-categories .listing-category {
+  background-color: #eef4fc;
+  color: #2a78d6;
+  border: none;
+}

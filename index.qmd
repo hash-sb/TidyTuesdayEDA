@@ -2,10 +2,13 @@
 title: "TidyTuesday EDA"
 listing:
   contents: posts
-  type: default
+  type: grid
+  grid-columns: 3
   sort: "date desc"
   date-format: "MMMM D, YYYY"
-  categories: false
+  categories: true
+  image-height: "180px"
+  max-description-length: 175
 page-layout: full
 title-block-banner: false
 ---
