@@ -275,7 +275,13 @@ theme_tt <- function() {
       axis.line.x = element_line(colour = "#c3c2b7", linewidth = 0.4),
       plot.background = element_rect(fill = "#fcfcfb", colour = NA),
       panel.background = element_rect(fill = "#fcfcfb", colour = NA),
-      legend.position = "none"
+      legend.position = "none",
+      # A little extra right-hand breathing room so the last axis tick's
+      # label (e.g. a wide number on a histogram's x-axis) doesn't get
+      # clipped at the panel edge -- confirmed by an actual render, not a
+      # blind guess: ref_period_id's rightmost "20250000" tick was visibly
+      # cut off to "202500" without this.
+      plot.margin = margin(t = 6, r = 16, b = 6, l = 6)
     )
 }
 
@@ -288,8 +294,12 @@ tt_emit_note <- function(msg) {
 # Subtitles are variable descriptions pulled verbatim from TidyTuesday's data
 # dictionary and can run to a full sentence; ggplot doesn't auto-wrap title/
 # subtitle text to the plot width, so long ones get clipped/overflow unless
-# wrapped into explicit line breaks first.
-TT_WRAP_WIDTH <- 90
+# wrapped into explicit line breaks first. 90 was picked blind before this
+# pipeline could be rendered locally and was confirmed too wide by an actual
+# render: an 84-character single line (no break inserted, since it was under
+# the old width) visibly overflowed past the plot's right edge. 65 leaves
+# real margin rather than sitting right at the failure boundary.
+TT_WRAP_WIDTH <- 65
 
 tt_wrap <- function(x, width = TT_WRAP_WIDTH) {
   if (is.null(x)) return(NULL)
