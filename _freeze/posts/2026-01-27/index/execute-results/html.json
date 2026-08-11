@@ -1,0 +1,17 @@
+{
+  "hash": "12bc7d72ed8ef52b7b72a09385fdc1fa",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: Brazilian Companies\ndate: '2026-01-27'\ncategories:\n- Companies\n- Legal Nature\n- Qualifications\n- Size\ndescription: Wikipedia's List of largest Brazilian companies\n---\n\n\n\nThis week we’re exploring  **Brazilian Companies**, curated from Brazil’s open **CNPJ (Cadastro Nacional da Pessoa Jurídica)** records published by the **Brazilian Ministry of Finance / Receita Federal** on the national open-data portal ([dados.gov.br](https://dados.gov.br/dados/conjuntos-dados/cadastro-nacional-da-pessoa-juridica---cnpj)).\n\n> The CNPJ open data is a large-scale public registry of Brazilian legal entities. For this dataset, the raw company records were cleaned and enriched with lookup tables (legal nature, owner qualification, and company size), then filtered to retain firms above a share-capital threshold so the analysis focuses on meaningful variation in capital stock.\n\n* Which **legal nature** categories concentrate the highest total and average capital stock?\n* How does **company size** relate to capital stock (and how skewed is it)?\n* Do specific **owner qualification** groups dominate high-capital companies?\n* What patterns emerge when comparing the **top capital-stock tail** across categories (legal nature, size, qualification)?\n\n\n**Data source:** [Open data CNPJ - December 2025](https://arquivos.receitafederal.gov.br/dados/cnpj/dados_abertos_cnpj/2025-12/)  \n**Original article:** [Wikipedia's List of largest Brazilian companies](https://en.wikipedia.org/wiki/List_of_largest_Brazilian_companies)  \n**Curated by:** Marcelo Silva  \n\n\n## Companies (141,332x6)\n![](index_files/figure-html/unnamed-chunk-2-1.png){width=672}\n\n::: {.tt-note}\n**company_name** — 140,739 unique values out of 141,332; looks like a free-text or identifier column, distribution not shown.\n:::\n\n![](index_files/figure-html/unnamed-chunk-2-2.png){width=672}![](index_files/figure-html/unnamed-chunk-2-3.png){width=672}![](index_files/figure-html/unnamed-chunk-2-4.png){width=672}![](index_files/figure-html/unnamed-chunk-2-5.png){width=672}\n\n## Legal Nature (91x2)\n![](index_files/figure-html/unnamed-chunk-3-1.png){width=672}\n\n::: {.tt-note}\n**legal_nature** — 90 unique values out of 91; looks like a free-text or identifier column, distribution not shown.\n:::\n\n## Qualifications (68x2)\n![](index_files/figure-html/unnamed-chunk-4-1.png){width=672}\n\n::: {.tt-note}\n**owner_qualification** — 68 unique values out of 68; looks like a free-text or identifier column, distribution not shown.\n:::\n\n## Size (4x2)\n![](index_files/figure-html/unnamed-chunk-5-1.png){width=672}![](index_files/figure-html/unnamed-chunk-5-2.png){width=672}\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
