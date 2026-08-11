@@ -1,0 +1,17 @@
+{
+  "hash": "53534598923fee7b9498410d3f6507ea",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: Films Based on Video Games\ndate: '2026-06-09'\ncategories:\n- Game Films\ndescription: List of films based on video games\n---\n\n\n\nThe dataset this week comes from the Wikipedia article [List of films based on video games](https://en.wikipedia.org/wiki/List_of_films_based_on_video_games). It covers theatrical releases, direct-to-video productions, television films, short films, and documentaries adapted from video games, spanning from the early 1990s to upcoming releases. Each row is a film, with box office figures, critic scores, budgets, and release dates where available.\n\n> The list covers feature films, animated films, live-action films, television films, and short films that are based on or inspired by a video game franchise.\n\nSome questions worth exploring:\n\n- Which video game franchise has generated the most film adaptations, and\n  which has earned the most at the box office?\n- Which video game publishers have the most film adaptations, and how have they performed at the box office?\n- Do audiences and critics agree? Compare CinemaScore grades against\n  Rotten Tomatoes scores.\n\n\n**Data source:** [Wikipedia](https://en.wikipedia.org/wiki/List_of_films_based_on_video_games)  \n**Original article:** [List of films based on video games](https://en.wikipedia.org/wiki/List_of_films_based_on_video_games)  \n**Curated by:** Georgios Karamanis  \n\n\n## Game Films (439x20)\n![](index_files/figure-html/unnamed-chunk-2-1.png){width=672}![](index_files/figure-html/unnamed-chunk-2-2.png){width=672}\n\n::: {.tt-note}\n**title** — 425 unique values out of 439; looks like a free-text or identifier column, distribution not shown.\n:::\n\n![](index_files/figure-html/unnamed-chunk-2-3.png){width=672}![](index_files/figure-html/unnamed-chunk-2-4.png){width=672}![](index_files/figure-html/unnamed-chunk-2-5.png){width=672}![](index_files/figure-html/unnamed-chunk-2-6.png){width=672}![](index_files/figure-html/unnamed-chunk-2-7.png){width=672}![](index_files/figure-html/unnamed-chunk-2-8.png){width=672}![](index_files/figure-html/unnamed-chunk-2-9.png){width=672}![](index_files/figure-html/unnamed-chunk-2-10.png){width=672}![](index_files/figure-html/unnamed-chunk-2-11.png){width=672}![](index_files/figure-html/unnamed-chunk-2-12.png){width=672}![](index_files/figure-html/unnamed-chunk-2-13.png){width=672}![](index_files/figure-html/unnamed-chunk-2-14.png){width=672}![](index_files/figure-html/unnamed-chunk-2-15.png){width=672}![](index_files/figure-html/unnamed-chunk-2-16.png){width=672}![](index_files/figure-html/unnamed-chunk-2-17.png){width=672}![](index_files/figure-html/unnamed-chunk-2-18.png){width=672}![](index_files/figure-html/unnamed-chunk-2-19.png){width=672}\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
