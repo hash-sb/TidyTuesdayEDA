@@ -127,10 +127,12 @@ tt_build_post <- function(date) {
 
   title <- as.character(meta$title %||% glue("TidyTuesday {date}"))
 
+  # No categories field: dataset names were unique per week almost by
+  # definition, so the category filter/badges never actually grouped more
+  # than one post together -- pure clutter, not a useful browsing aid.
   frontmatter <- list(
     title = title,
-    date = date,
-    categories = as.list(str_to_title(str_replace_all(basenames, "_", " ")))
+    date = date
   )
   if (!is.null(meta$article$title)) {
     frontmatter$description <- meta$article$title

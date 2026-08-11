@@ -6,7 +6,7 @@ listing:
   grid-columns: 3
   sort: "date desc"
   date-format: "MMMM D, YYYY"
-  categories: true
+  categories: false
   image-height: "180px"
   max-description-length: 175
 page-layout: full
