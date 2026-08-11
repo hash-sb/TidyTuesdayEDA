@@ -337,7 +337,13 @@ tt_render_variable <- function(x, variable, description) {
       geom_histogram(fill = TT_BLUE, bins = 30, na.rm = TRUE) +
       labs(title = variable, subtitle = tt_wrap(description), x = NULL, y = "count",
            caption = tt_wrap(caption)) +
-      theme_tt()
+      # Bars sit flush on a zero baseline (no expansion below zero) with a
+      # little headroom above the tallest bar; gridlines only run parallel to
+      # the count axis -- vertical ones between bins don't align with
+      # anything meaningful and are just visual noise.
+      scale_y_continuous(labels = comma, expand = expansion(mult = c(0, 0.05))) +
+      theme_tt() +
+      theme(panel.grid.major.x = element_blank())
   } else if (inherits(x, "Date") || inherits(x, "POSIXct")) {
     d <- data.frame(x = x)
     stats <- glue("Range: {format(min(x, na.rm = TRUE))} to {format(max(x, na.rm = TRUE))}")
@@ -346,7 +352,9 @@ tt_render_variable <- function(x, variable, description) {
       geom_histogram(fill = TT_BLUE, bins = 30, na.rm = TRUE) +
       labs(title = variable, subtitle = tt_wrap(description), x = NULL, y = "count",
            caption = tt_wrap(caption)) +
-      theme_tt()
+      scale_y_continuous(labels = comma, expand = expansion(mult = c(0, 0.05))) +
+      theme_tt() +
+      theme(panel.grid.major.x = element_blank())
   } else if (cls == "logical") {
     d <- data.frame(x = factor(ifelse(is.na(x), "NA", as.character(x)),
                                 levels = c("TRUE", "FALSE", "NA")))
@@ -354,7 +362,9 @@ tt_render_variable <- function(x, variable, description) {
       geom_bar(fill = TT_BLUE, na.rm = TRUE) +
       labs(title = variable, subtitle = tt_wrap(description), x = NULL, y = "count",
            caption = tt_wrap(missing_stat)) +
-      theme_tt()
+      scale_y_continuous(labels = comma, expand = expansion(mult = c(0, 0.05))) +
+      theme_tt() +
+      theme(panel.grid.major.x = element_blank())
   } else if (cls %in% c("character", "factor")) {
     xc <- as.character(x)
     xc <- xc[!is.na(xc)]
@@ -375,7 +385,11 @@ tt_render_variable <- function(x, variable, description) {
         total_categories <- length(counts)
         top <- counts[1:15]
         other_n <- sum(counts[-(1:15)])
-        counts <- c(top, `(other)` = other_n)
+        # Re-sort rather than appending "(other)" at the end: it's the sum of
+        # everything past the top 15, so it can easily outweigh several of
+        # them -- pinning it last regardless of size would break the
+        # "bars are ordered by size" expectation every other bar sets up.
+        counts <- sort(c(top, `(other)` = other_n), decreasing = TRUE)
         trunc_note <- glue("top 15 of {total_categories} categories shown, rest grouped as \"(other)\"")
       }
       caption <- paste(c(cat_stats, trunc_note, missing_stat), collapse = " · ")
@@ -406,11 +420,18 @@ tt_render_variable <- function(x, variable, description) {
         geom_col(fill = TT_BLUE) +
         labs(title = variable, subtitle = tt_wrap(description), x = "count", y = NULL,
              caption = tt_wrap(caption)) +
+        scale_x_continuous(labels = comma, expand = expansion(mult = c(0, 0.05))) +
         theme_tt() +
-        # Fixed-width padding only lines up visually under a monospace font --
-        # under the site's normal proportional font, equal character counts
-        # don't render to equal pixel widths.
-        theme(axis.text.y = element_text(family = "mono"))
+        theme(
+          # Fixed-width padding only lines up visually under a monospace font
+          # -- under the site's normal proportional font, equal character
+          # counts don't render to equal pixel widths.
+          axis.text.y = element_text(family = "mono"),
+          # Gridlines only run parallel to the count axis (vertical here);
+          # one horizontal line per category is redundant with the bars
+          # themselves and just adds noise.
+          panel.grid.major.y = element_blank()
+        )
     }
   } else {
     note <- glue("**{variable}** — unsupported column type (`{cls}`); distribution not shown.")
