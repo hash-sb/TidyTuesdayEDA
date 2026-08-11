@@ -1,0 +1,34 @@
+---
+title: Films Based on Video Games
+date: '2026-06-09'
+categories:
+- Game Films
+description: List of films based on video games
+---
+
+```{r}
+#| include: false
+source("R/tt_helpers.R")
+```
+
+The dataset this week comes from the Wikipedia article [List of films based on video games](https://en.wikipedia.org/wiki/List_of_films_based_on_video_games). It covers theatrical releases, direct-to-video productions, television films, short films, and documentaries adapted from video games, spanning from the early 1990s to upcoming releases. Each row is a film, with box office figures, critic scores, budgets, and release dates where available.
+
+> The list covers feature films, animated films, live-action films, television films, and short films that are based on or inspired by a video game franchise.
+
+Some questions worth exploring:
+
+- Which video game franchise has generated the most film adaptations, and
+  which has earned the most at the box office?
+- Which video game publishers have the most film adaptations, and how have they performed at the box office?
+- Do audiences and critics agree? Compare CinemaScore grades against
+  Rotten Tomatoes scores.
+
+
+**Data source:** [Wikipedia](https://en.wikipedia.org/wiki/List_of_films_based_on_video_games)  
+**Original article:** [List of films based on video games](https://en.wikipedia.org/wiki/List_of_films_based_on_video_games)  
+**Curated by:** Georgios Karamanis  
+
+```{r}
+#| output: asis
+tt_dataset_section("2026-06-09", "game_films", "Game Films")
+```
