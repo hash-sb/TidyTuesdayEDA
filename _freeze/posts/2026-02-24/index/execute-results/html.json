@@ -1,0 +1,17 @@
+{
+  "hash": "5c9e3df74fcb01f92e60cf711ccc8890",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: Science Foundation Ireland Grants Commitments\ndate: '2026-02-24'\ncategories:\n- Sfi Grants\ndescription: Science Foundation Ireland Historical Grants Commitments\n---\n\n\n\nThis week we're exploring Irish STEM research and ancillary projects funded by Science\nFoundation Ireland (SFI) since its foundation in 2000 to its dissolution on 31st\nJuly 2024. The data comes from [Ireland's Open Data Portal](https://data.gov.ie/dataset/science-foundation-ireland-grants-commitments)\n\n> SFI was the national foundation in Ireland for investment in scientific and\n> engineering research. Consequently, SFI invested in those academic\n> researchers and research teams who were most likely to generate new\n> knowledge, leading edge technologies and competitive enterprises in the\n> fields of science, technology, engineering and maths (STEM).\n\n- Which Higher Education Institute received the most grant funding?\n- How much did Science Foundation Ireland invest into research each year?\n\n\n**Data source:** [Science Foundation Ireland Historical Grants Commitments](https://data.gov.ie/dataset/science-foundation-ireland-grants-commitments)  \n**Original article:** [Science Foundation Ireland Historical Grants Commitments](https://data.gov.ie/dataset/science-foundation-ireland-grants-commitments)  \n**Curated by:** Cormac Monaghan  \n\n\n## Sfi Grants (7,269x12)\n![](index_files/figure-html/unnamed-chunk-2-1.png){width=672}![](index_files/figure-html/unnamed-chunk-2-2.png){width=672}\n\n::: {.tt-note}\n**proposal_id** — 7,269 unique values out of 7,269; looks like a free-text or identifier column, distribution not shown.\n:::\n\n![](index_files/figure-html/unnamed-chunk-2-3.png){width=672}![](index_files/figure-html/unnamed-chunk-2-4.png){width=672}![](index_files/figure-html/unnamed-chunk-2-5.png){width=672}![](index_files/figure-html/unnamed-chunk-2-6.png){width=672}![](index_files/figure-html/unnamed-chunk-2-7.png){width=672}![](index_files/figure-html/unnamed-chunk-2-8.png){width=672}![](index_files/figure-html/unnamed-chunk-2-9.png){width=672}![](index_files/figure-html/unnamed-chunk-2-10.png){width=672}![](index_files/figure-html/unnamed-chunk-2-11.png){width=672}\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

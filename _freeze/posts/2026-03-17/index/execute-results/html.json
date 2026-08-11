@@ -1,0 +1,17 @@
+{
+  "hash": "61efa7882bb5a4a0acaba5f16ca4b97f",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: Salmonid Mortality Data\ndate: '2026-03-17'\ncategories:\n- Monthly Losses Data\n- Monthly Mortality Data\ndescription: Launch of the Fish Health Report (in Norwegian)\n---\n\n\n\nThe datasets this week come from the suite of Salmonid mortality  datasets published by the Norwegian Veterinary Institute. A total of five datasets are published on the [Laksetap Shiny App](https://apps.vetinst.no/laksetap/) and [API](https://apps.vetinst.no/salmonid-mortality-public-api/). This data captures the public interest as the Norwegian government [goal](https://blog.manolinaqua.com/en/norways-5-percent-goal-for-lower-salmon-mortality) is to push for lower mortality. Here, two datasets are shared, the monthly mortality  data, and the monthly loses data. TidyTuesday users can explore the other datasets  if they wish. Data is available from 2020.\n\n> The Fish Health Report is the Norwegian Veterinary Institute's \n> annual status report on the health and welfare situation for \n> Norwegian farmed fish and is based on official statistics, \n> data from the Norwegian Veterinary Institute and private laboratories. \n> The report also contains results from a survey among fish health \n> personnel and inspectors from the Norwegian Food Safety Authority, \n> as well as assessments of the situation, trends and risks.\n\n- How does monthly mortality differ across the time period data is available for?\n- Which region has lowest mortality?\n- What other types of loses may be significant in addition to death of fish?\n\n\n**Data source:** [Norwegian Veterinary Institute](https://apps.vetinst.no/laksetap/)  \n**Original article:** [Launch of the Fish Health Report (in Norwegian)](https://www.vetinst.no/arrangementer/lansering-av-fiskehelserapporten-2026)  \n**Curated by:** Novica Nakov  \n\n\n## Monthly Losses Data (2,808x9)\n![](index_files/figure-html/unnamed-chunk-2-1.png){width=672}![](index_files/figure-html/unnamed-chunk-2-2.png){width=672}![](index_files/figure-html/unnamed-chunk-2-3.png){width=672}![](index_files/figure-html/unnamed-chunk-2-4.png){width=672}![](index_files/figure-html/unnamed-chunk-2-5.png){width=672}![](index_files/figure-html/unnamed-chunk-2-6.png){width=672}![](index_files/figure-html/unnamed-chunk-2-7.png){width=672}![](index_files/figure-html/unnamed-chunk-2-8.png){width=672}![](index_files/figure-html/unnamed-chunk-2-9.png){width=672}\n\n## Monthly Mortality Data (1,788x7)\n![](index_files/figure-html/unnamed-chunk-3-1.png){width=672}![](index_files/figure-html/unnamed-chunk-3-2.png){width=672}![](index_files/figure-html/unnamed-chunk-3-3.png){width=672}![](index_files/figure-html/unnamed-chunk-3-4.png){width=672}![](index_files/figure-html/unnamed-chunk-3-5.png){width=672}![](index_files/figure-html/unnamed-chunk-3-6.png){width=672}![](index_files/figure-html/unnamed-chunk-3-7.png){width=672}\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
