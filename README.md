@@ -13,12 +13,18 @@ with its official data-dictionary description.
   TidyTuesday repo every 4 hours (and can be run manually). When it finds a
   week that doesn't have a page yet, `R/check_and_build.R` scaffolds
   `posts/<date>/index.qmd` and the workflow commits it to `main`.
-- **`.github/workflows/publish.yml`** runs on every push to `main`. It renders
-  the whole site with Quarto and deploys it to GitHub Pages. Posts fetch their
-  data straight from `raw.githubusercontent.com` at render time (see
-  `R/tt_helpers.R`), so no raw CSVs are stored in this repo — only the
-  generated `.qmd` files and Quarto's `_freeze/` render cache (kept so
-  already-built weeks aren't re-downloaded/re-rendered on every run).
+- **`.github/workflows/publish.yml`** renders the whole site with Quarto and
+  deploys it to GitHub Pages. It runs on `workflow_dispatch` and on pushes to
+  `main`, but a push made with a workflow's default `GITHUB_TOKEN` does
+  **not** trigger other workflows' `push` events (a GitHub Actions safeguard
+  against recursive workflow chains) — so `check-tidytuesday.yml` and
+  `backfill-tidytuesday.yml` each explicitly dispatch `publish.yml` via
+  `gh workflow run publish.yml` right after they push a new post, rather than
+  relying on the push event to cascade. Posts fetch their data straight from
+  `raw.githubusercontent.com` at render time (see `R/tt_helpers.R`), so no
+  raw CSVs are stored in this repo — only the generated `.qmd` files and
+  Quarto's `_freeze/` render cache (kept so already-built weeks aren't
+  re-downloaded/re-rendered on every run).
 - **`.github/workflows/backfill-tidytuesday.yml`** is manual-only
   (**Actions → Backfill past TidyTuesday challenges → Run workflow**). It
   prompts for a `start_date`/`end_date` (YYYY-MM-DD) and builds a post for

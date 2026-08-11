@@ -3,8 +3,10 @@ name: Check for new TidyTuesday challenge
 # TidyTuesday is usually published on Monday, but drops can slip, so this
 # polls regularly instead of relying on a once-a-week schedule. If a new
 # week is found, R/check_and_build.R scaffolds posts/<date>/index.qmd and
-# this workflow commits it straight to main. That push is what triggers
-# publish.yml to render and redeploy the site.
+# this workflow commits it straight to main. Pushes made with the default
+# GITHUB_TOKEN don't trigger other workflows' `push` events (GitHub disables
+# that specifically to prevent recursive workflow chains), so publish.yml
+# wouldn't actually fire on its own -- this explicitly dispatches it instead.
 
 on:
   schedule:
@@ -13,6 +15,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: tidytuesday-content
@@ -40,13 +43,22 @@ jobs:
         run: Rscript R/check_and_build.R
 
       - name: Commit and push new post
+        id: commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add posts/
           if git diff --cached --quiet; then
             echo "No new TidyTuesday post to commit."
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
           else
             git commit -m "Add TidyTuesday post for ${POST_DATE:-$(date -u +%F)}"
             git push
+            echo "pushed=true" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: Trigger site publish
+        if: steps.commit.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run publish.yml --ref main
