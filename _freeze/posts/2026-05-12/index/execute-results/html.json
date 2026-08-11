@@ -1,0 +1,17 @@
+{
+  "hash": "446578f84fb9daf1be11d542b3eaf8ee",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: Twinned Cities\ndate: '2026-05-12'\ncategories:\n- Cities\n- Links\ndescription: Twin Cities Explorer\n---\n\n\n\nThis week we're exploring data about links between cities! Twinned towns (also known as sister cities) are a form of legal or social agreement between two geographically and politically distinct localities for the purpose of promoting cultural and commercial ties. This dataset looks at links specifically between cities, i.e. it does not include towns, villages or other geographic entities..\n \nWikipedia states:\n\n> While there are early examples of international links between municipalities akin to what are now known as sister cities dating back to the 9th century, the modern concept was first established and adopted worldwide during World War II.\n\n* Is every country connected through a chain of twin city links?\n* Which city is the most connected?\n* Which countries are the most connected to each other?\n\nThank you to @bothness for [curating the original dataset](https://bothness.github.io/twin-cities/) and [suggesting it on Bluesky](https://bsky.app/profile/bothness.bsky.social/post/3mkmroqdulk24)!\n\n\n**Data source:** [Wikidata Query Service](https://query.wikidata.org/)  \n**Original article:** [Twin Cities Explorer](https://bothness.github.io/twin-cities/)  \n**Curated by:** Nicola Rennie  \n\n\n## Cities (5,470x7)\n\n\n::: {.tt-note}\n**id** — 5,470 unique values out of 5,470; looks like a free-text or identifier column, distribution not shown.\n:::\n\n\n\n::: {.tt-note}\n**name** — 5,349 unique values out of 5,470; looks like a free-text or identifier column, distribution not shown.\n:::\n\n![](index_files/figure-html/unnamed-chunk-2-1.png){width=672}![](index_files/figure-html/unnamed-chunk-2-2.png){width=672}![](index_files/figure-html/unnamed-chunk-2-3.png){width=672}![](index_files/figure-html/unnamed-chunk-2-4.png){width=672}![](index_files/figure-html/unnamed-chunk-2-5.png){width=672}\n\n## Links (10,596x2)\n![](index_files/figure-html/unnamed-chunk-3-1.png){width=672}![](index_files/figure-html/unnamed-chunk-3-2.png){width=672}\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
