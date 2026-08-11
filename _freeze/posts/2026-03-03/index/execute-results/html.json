@@ -1,0 +1,17 @@
+{
+  "hash": "354d6da2cfaef040552f20ecd6b790ea",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: Golem Grad Tortoise Data\ndate: '2026-03-03'\ncategories:\n- Clutch Size Cleaned\n- Tortoise Body Condition Cleaned\ndescription: Sex Ratio Bias Triggers Demographic Suicide in a Dense Tortoise Population\n---\n\n\n\nThe datasets this week come from the paper \"[Sex Ratio Bias Triggers Demographic Suicide in a Dense Tortoise Population](https://onlinelibrary.wiley.com/doi/10.1111/ele.70296)\".\nThis topic seemed so interesting that even media like the New York Times picked it up:\n\"[Constant Sexual Aggression Drives Female Tortoises to Walk Off Cliffs](https://www.nytimes.com/2026/02/14/science/tortoises-island-sex-cliff.html)\".\n\n> In an exceptionally dense island population of Hermann's tortoises \n> in Lake Prespa in North Macedonia, sexually coercive males \n> dramatically overnumber females, inflict severe copulatory injuries \n> and put them at risk of fatal falls from the island plateau's sheer \n> rock faces. Harassed females are emaciated, reproduce less frequently,\n> produce smaller clutches and have lower annual survival rates compared \n> to females from a neighbouring mainland population. Sixteen years of \n> capture-recapture data reveal an ongoing extinction event and predict\n> that the last island female will die in 2083. \n\n- Do recaptures happen more often in spring or summer? \n- Does it seem easier to recapture male or female tortoises?\n- What are the differences among tortoises from the mainland vs the ones from the island in terms of body mass or carapace length?\n\n\n**Data source:** [Sex Ratio Bias Triggers Demographic Suicide in a Dense Tortoise Population](https://figshare.com/articles/journal_contribution/Sex_ratio_bias_triggers_demographic_suicide_in_a_dense_tortoise_population/30752687)  \n**Original article:** [Sex Ratio Bias Triggers Demographic Suicide in a Dense Tortoise Population](https://onlinelibrary.wiley.com/doi/10.1111/ele.70296)  \n**Curated by:** Novica Nakov, Free Software Macedonia  \n\n\n## Clutch Size Cleaned (53x7)\n![](index_files/figure-html/unnamed-chunk-2-1.png){width=672}![](index_files/figure-html/unnamed-chunk-2-2.png){width=672}![](index_files/figure-html/unnamed-chunk-2-3.png){width=672}![](index_files/figure-html/unnamed-chunk-2-4.png){width=672}![](index_files/figure-html/unnamed-chunk-2-5.png){width=672}![](index_files/figure-html/unnamed-chunk-2-6.png){width=672}![](index_files/figure-html/unnamed-chunk-2-7.png){width=672}\n\n## Tortoise Body Condition Cleaned (10,174x9)\n![](index_files/figure-html/unnamed-chunk-3-1.png){width=672}![](index_files/figure-html/unnamed-chunk-3-2.png){width=672}![](index_files/figure-html/unnamed-chunk-3-3.png){width=672}![](index_files/figure-html/unnamed-chunk-3-4.png){width=672}![](index_files/figure-html/unnamed-chunk-3-5.png){width=672}![](index_files/figure-html/unnamed-chunk-3-6.png){width=672}![](index_files/figure-html/unnamed-chunk-3-7.png){width=672}![](index_files/figure-html/unnamed-chunk-3-8.png){width=672}![](index_files/figure-html/unnamed-chunk-3-9.png){width=672}\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

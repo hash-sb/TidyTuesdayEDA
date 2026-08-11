@@ -1,0 +1,17 @@
+{
+  "hash": "2556c57b08833a849ed166d318505e42",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: Wreck Inventory of Ireland\ndate: '2026-06-30'\ncategories:\n- Wreck Inventory\ndescription: Wreck Inventory of Ireland\n---\n\n\n\nThis week we are exploring Irish shipwreck data. The [Wreck Inventory of Ireland Database (WIID)](https://www.archaeology.ie/advice-and-support/locate-a-monument-or-wreck/wreck-viewer/) holds records of over 18,000 known and potential wreck sites in Irish waters, with data going back all the way to the 1300s.\n\n> The Wreck Inventory of Ireland Database (WIID) holds records of over\n> 18,000 known and potential wreck sites in the marine and inland waterways of\n> Ireland. The WIID includes all known wrecks dating to pre-1946 but some later\n> wrecks are also included. The database also includes records of aircraft\n> wrecks where these have come to attention.\n\n- How many wrecks still have not been found?\n- Where are shipwrecks more likely to occur around Ireland?\n\n\n**Data source:** [Wreck Inventory of Ireland](https://data.gov.ie/dataset/national-monuments-service-wreck-inventory-of-ireland)  \n**Original article:** [Wreck Inventory of Ireland](https://www.archaeology.ie/advice-and-support/locate-a-monument-or-wreck/wreck-viewer/)  \n**Curated by:** Cormac Monaghan  \n\n\n## Wreck Inventory (17,981x11)\n![](index_files/figure-html/unnamed-chunk-2-1.png){width=672}![](index_files/figure-html/unnamed-chunk-2-2.png){width=672}![](index_files/figure-html/unnamed-chunk-2-3.png){width=672}\n\n::: {.tt-note}\n**wreck_no** — 17,981 unique values out of 17,981; looks like a free-text or identifier column, distribution not shown.\n:::\n\n![](index_files/figure-html/unnamed-chunk-2-4.png){width=672}![](index_files/figure-html/unnamed-chunk-2-5.png){width=672}![](index_files/figure-html/unnamed-chunk-2-6.png){width=672}![](index_files/figure-html/unnamed-chunk-2-7.png){width=672}![](index_files/figure-html/unnamed-chunk-2-8.png){width=672}![](index_files/figure-html/unnamed-chunk-2-9.png){width=672}![](index_files/figure-html/unnamed-chunk-2-10.png){width=672}\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
