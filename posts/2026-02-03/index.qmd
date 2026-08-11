@@ -1,0 +1,29 @@
+---
+title: Edible Plants Database
+date: '2026-02-03'
+categories:
+- Edible Plants
+description: GROW Observatory
+---
+
+```{r}
+#| include: false
+source("R/tt_helpers.R")
+```
+
+This week we're exploring edible plants! The Edible Plant Database (EPD) is an outcome of the GROW Observatory, a European Citizen Science project on growing food, soil moisture sensing and land monitoring. It contains information on 146 edible plant species, including their ideal growing conditions and time to harvest and germination.
+
+> The Edible Plant Database provides data based on geographical location and growing season to answer questions such as "What can I plant now" and "what can I plant that will yield a crop on some future date".
+
+* Do plants that require more sunlight also require higher temperatures?
+* What cultivation classes require the most water?
+
+
+**Data source:** [Edible Plant Database](https://discovery.dundee.ac.uk/en/datasets/edible-plant-database/)  
+**Original article:** [GROW Observatory](https://www.dundee.ac.uk/projects/grow-observatory)  
+**Curated by:** Nicola Rennie  
+
+```{r}
+#| output: asis
+tt_dataset_section("2026-02-03", "edible_plants", "Edible Plants")
+```

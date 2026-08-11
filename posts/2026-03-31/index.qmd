@@ -1,0 +1,37 @@
+---
+title: Coastal Ocean Temperature by Depth
+date: '2026-03-31'
+categories:
+- Ocean Temperature
+- Ocean Temperature Deployments
+description: 'Understanding Complex Data: Coastal Monitoring'
+---
+
+```{r}
+#| include: false
+source("R/tt_helpers.R")
+```
+
+This week we're exploring over 7 years of daily coastal ocean temperatures at 7 depths from a location in Nova Scotia, Canada. The data was collected through the Centre for Marine Applied Research's [Coastal Monitoring Program](https://cmar.ca/coastal-monitoring-program/). This and related data sets can be downloaded from the [Nova Scotia Open Data Portal](https://data.novascotia.ca/browse?tags=coastal+monitoring+program&sortBy=last_modified&pageSize=20).
+
+> The Province of Nova Scotia recognizes the importance of coastal waters, which are critical to the prosperity and sustainability of rural and coastal communities. To bridge the gap between science and decision making, the Nova Scotia Department of Fisheries and Aquaculture (NSDFA) partners with the Centre for Marine Applied Research (CMAR) to measure the environmental conditions of Nova Scotia’s coastal waters.
+
+Have fun exploring this ocean data set (and be wary of days with no data)! Here are a few questions to get you started:
+
+-   How are temperatures changing over time? Is the change more pronounced at a different time of year or a specific depth?
+
+-   How does temperature change with depth? Does the relationship change over time?
+
+
+**Data source:** [Lunenburg County Water Quality Data](https://data.novascotia.ca/Nature-and-Environment/Lunenburg-County-Water-Quality-Data/eda5-aubu/about_data)  
+**Original article:** [Understanding Complex Data: Coastal Monitoring](https://data.novascotia.ca/stories/s/a25g-piws)  
+**Curated by:** Danielle Dempsey and Rachel Woodside, Centre for Marine Applied Research  
+
+```{r}
+#| output: asis
+tt_dataset_section("2026-03-31", "ocean_temperature", "Ocean Temperature")
+```
+```{r}
+#| output: asis
+tt_dataset_section("2026-03-31", "ocean_temperature_deployments", "Ocean Temperature Deployments")
+```
