@@ -385,11 +385,11 @@ tt_render_variable <- function(x, variable, description) {
         total_categories <- length(counts)
         top <- counts[1:15]
         other_n <- sum(counts[-(1:15)])
-        # Re-sort rather than appending "(other)" at the end: it's the sum of
-        # everything past the top 15, so it can easily outweigh several of
-        # them -- pinning it last regardless of size would break the
-        # "bars are ordered by size" expectation every other bar sets up.
-        counts <- sort(c(top, `(other)` = other_n), decreasing = TRUE)
+        # Deliberately pinned last rather than sorted by size: "(other)" is a
+        # catch-all summary row, not a real category competing on its own
+        # merits, so it reads as "everything else" regardless of how its
+        # magnitude compares to the top 15 shown above it.
+        counts <- c(top, `(other)` = other_n)
         trunc_note <- glue("top 15 of {total_categories} categories shown, rest grouped as \"(other)\"")
       }
       caption <- paste(c(cat_stats, trunc_note, missing_stat), collapse = " · ")
