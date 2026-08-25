@@ -1,0 +1,51 @@
+---
+title: Country Music Lyrics
+date: '2026-08-25'
+description: Every country song has these lyrics. Right?
+image: https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-08-25/Comparison-of-Popular-Terms.png
+image-alt: |
+  A multi-series line chart titled 'Comparison of Popular Terms', created by Dana Gibbon, tracks the usage frequency of 20 lyrical words across songs from 2014 through 2019, measured as a percentage of songs on the y-axis ranging from 0% to over 60%. The word 'wanna' sits at the top of the chart for nearly the entire period, peaking sharply around 70% in 2018, followed closely by high-frequency terms like 'girl' and 'yeah' which hover between 35% and 50%. In contrast, terms like 'drink', 'drinkin', and 'lovin' stay consistently near the bottom of the chart below 15%, while middle-tier terms such as 'tonight', 'night', and 'little' show moderate year-to-year shifts within the 20% to 50% range.
+---
+
+```{r}
+#| include: false
+source("R/tt_helpers.R")
+```
+
+This week we're exploring **Country Music Lyrics**. The dataset comes from 
+[Grady Smith](https://www.youtube.com/@GradySmith)'s investigation into some stereotypes associated with this music genre.  
+
+Here's an excerpt from his video, ["Every country song has these lyrics. Right?"](https://www.youtube.com/watch?v=48ZxNFGJTo8), where he discusses his findings:  
+
+> Today's video is a DEEP DIVE into the world of country music, and I'm determined to figure out if the stereotypes people have about modern country songwriting are actually true. Is it REALLY all about beer and trucks and girls and blue jeans? Are all the lyrics REALLY the same? To find out, I maintained a spreadsheet of every country song that has reached the Top 30 of Billboard's Country Airplay chart for the past six years (2014-2019) and then crunched a whole lot of data.
+
+Dana Gibbon created [this notebook](https://danagibbon.github.io/country-music-lyrics-grady/gibbon_report.html#tables) that summarized and visualised some insights from the data.  
+
+Some questions you can answer:
+
+- Is country radio run by a small circle of hitmakers?  
+- How has the country 'vocabulary' shifted over time?    
+
+Thank you to [Jake Kaupp](https://github.com/jkaupp) for [suggesting this dataset](https://github.com/rfordatascience/tidytuesday/issues/261).
+
+
+**Data source:** [Country Lyrics Amazing Spreadsheet](https://drive.google.com/file/d/1lz-xpqufGggdPh4gUeIdYvtB2s8ePewn/view)  
+**Original article:** [Every country song has these lyrics. Right?](https://www.youtube.com/watch?v=48ZxNFGJTo8)  
+**Curated by:** Ntobeko Sosibo  
+
+```{r}
+#| output: asis
+tt_dataset_section("2026-08-25", "country_lyrics", "Country Lyrics")
+```
+```{r}
+#| output: asis
+tt_dataset_section("2026-08-25", "top_all_writers", "Top All Writers")
+```
+```{r}
+#| output: asis
+tt_dataset_section("2026-08-25", "top_primary_writers", "Top Primary Writers")
+```
+```{r}
+#| output: asis
+tt_dataset_section("2026-08-25", "top_producers", "Top Producers")
+```
