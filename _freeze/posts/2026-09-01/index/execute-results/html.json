@@ -1,0 +1,17 @@
+{
+  "hash": "8184775797c11b993197753de7b8c05a",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: World Castles, Fortresses and Palaces\ndate: '2026-09-01'\ndescription: Castlemap — Castles of the World dataset\nimage: https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-09-01/alhambra.png\nimage-alt: |\n  Photograph of the Alhambra in Granada, Spain, seen from across the valley in low evening sunlight. The long sandstone complex runs across the frame on a wooded ridge, its walls and square crenellated towers lit warm orange against a pale blue sky. A tall keep with battlements stands left of centre and the boxy Renaissance facade of the Palace of Charles the Fifth sits to the right, with dark green woodland and cypresses filling the slope below. The Alhambra is ranked seventh of the 5,793 landmarks in this dataset, with articles in 95 Wikipedia language editions.\n---\n\n\n\nThis week we're exploring the [Castlemap](https://thecastlemap.com/data/) dataset of 5,793 castles, fortresses, palaces and ruins in 138 countries. The data comes from Wikidata, and every landmark has verified coordinates, a Wikipedia article and a photo on Wikimedia Commons. Each also has a fame rank, based on how many languages have an article on it and how often that article is read. The Great Wall of China is first.\n\n- Which countries have the most castles?\n- Are palaces newer than fortresses?\n- Which landmarks have articles in many languages but few readers?\n\n\n**Data source:** [Castlemap, curated from Wikidata](https://thecastlemap.com/data/)  \n**Original article:** [Castlemap — Castles of the World dataset](https://thecastlemap.com/data/)  \n**Curated by:** Georgios Karamanis  \n\n\n## World Castles (5,793x15)\n\n\n::: {.tt-note}\n**qid** — 5,793 unique values out of 5,793; looks like a free-text or identifier column, distribution not shown.\n:::\n\n\n\n::: {.tt-note}\n**name** — 5,793 unique values out of 5,793; looks like a free-text or identifier column, distribution not shown.\n:::\n\n![](index_files/figure-html/unnamed-chunk-2-1.png){width=672}![](index_files/figure-html/unnamed-chunk-2-2.png){width=672}![](index_files/figure-html/unnamed-chunk-2-3.png){width=672}![](index_files/figure-html/unnamed-chunk-2-4.png){width=672}![](index_files/figure-html/unnamed-chunk-2-5.png){width=672}![](index_files/figure-html/unnamed-chunk-2-6.png){width=672}![](index_files/figure-html/unnamed-chunk-2-7.png){width=672}![](index_files/figure-html/unnamed-chunk-2-8.png){width=672}\n\n::: {.tt-note}\n**wikipedia** — 5,793 unique values out of 5,793; looks like a free-text or identifier column, distribution not shown.\n:::\n\n\n\n::: {.tt-note}\n**image** — 5,791 unique values out of 5,793; looks like a free-text or identifier column, distribution not shown.\n:::\n\n![](index_files/figure-html/unnamed-chunk-2-9.png){width=672}![](index_files/figure-html/unnamed-chunk-2-10.png){width=672}![](index_files/figure-html/unnamed-chunk-2-11.png){width=672}\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
