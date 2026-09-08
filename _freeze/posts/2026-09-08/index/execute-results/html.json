@@ -1,0 +1,17 @@
+{
+  "hash": "14681b7cdce7042d88c63b62d3cc316a",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: The Cappuccino Index\ndate: '2026-09-08'\ndescription: The Surprising Things We Discovered In The Cost Of A Cappuccino\nimage: https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-09-08/coffee.png\nimage-alt: |\n  Coffee beans.\n---\n\n\n\nJames Hoffmann is a YouTuber who explores coffee from many different angles. In a recent [video](https://www.youtube.com/watch?v=WtlE3BW9Nqs) he explored how long a barista would need to work to pay for a small cappuccino. \n\n> Coffee, as a part of our economy, as an industry, is full of these awkward questions that I do think are worth asking.\n\nIn the video, James presents the cappuccino index, which answers this at a country level. There are many interesting findings. You may want to watch the whole video as context and entertainment. There are some important caveats, such as tips being excluded.\n\nYou might think about:\n\n- Some sample sizes are small. How uncertain is the ranking?\n- Which countries have the biggest variability in the price of a small cappuccino?\n- Are there any outliers?\n\n\n**Data source:** [The 2026 Cappuccino Index](https://datastudio.google.com/reporting/b3354e23-eaff-4bd6-a776-24736dddf4c3/page/DqZ5F?s=iUIPWXb58zs)  \n**Original article:** [The Surprising Things We Discovered In The Cost Of A Cappuccino](https://www.youtube.com/watch?v=WtlE3BW9Nqs)  \n**Curated by:** Filip Reierson  \n\n\n## Cafe (2,594x10)\n![](index_files/figure-html/unnamed-chunk-2-1.png){width=672}![](index_files/figure-html/unnamed-chunk-2-2.png){width=672}![](index_files/figure-html/unnamed-chunk-2-3.png){width=672}![](index_files/figure-html/unnamed-chunk-2-4.png){width=672}![](index_files/figure-html/unnamed-chunk-2-5.png){width=672}![](index_files/figure-html/unnamed-chunk-2-6.png){width=672}![](index_files/figure-html/unnamed-chunk-2-7.png){width=672}![](index_files/figure-html/unnamed-chunk-2-8.png){width=672}![](index_files/figure-html/unnamed-chunk-2-9.png){width=672}![](index_files/figure-html/unnamed-chunk-2-10.png){width=672}\n\n## Cappuccino Index (87x6)\n\n\n::: {.tt-note}\n**country** — 87 unique values out of 87; looks like a free-text or identifier column, distribution not shown.\n:::\n\n![](index_files/figure-html/unnamed-chunk-3-1.png){width=672}![](index_files/figure-html/unnamed-chunk-3-2.png){width=672}![](index_files/figure-html/unnamed-chunk-3-3.png){width=672}![](index_files/figure-html/unnamed-chunk-3-4.png){width=672}\n\n::: {.tt-note}\n**index_as_time** — 87 unique values out of 87; looks like a free-text or identifier column, distribution not shown.\n:::\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
