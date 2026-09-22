@@ -1,0 +1,17 @@
+{
+  "hash": "c98f3f947bded8e75365515912e743f6",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: Average share of green areas across cities\ndate: '2026-09-22'\ndescription: Open Spaces and Green Areas\nimage: https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-09-22/urban.png\nimage-alt: |\n  A map of the world, with each country colored in shades of yellow-green by the average share of urban area that is green, by country in 2020. Portugal, Belize, and Fiji appear to be the most green at about 25-30% green in urban areas.\n---\n\n\n\nThis week we are exploring the average share of green areas in cities and urban\nareas and green area per capita around the world. The dataset this week comes\nfrom [UN Habitat Urban Indicators Dataset](https://data.unhabitat.org/pages/open-spaces-and-green-areas). \n\n> The data referenced herein is calculated using urban boundaries defined using the Degree of Urbanization approach to defining cities and urban areas, which may be larger or smaller than the official municipality boundaries. Within each city/urban area, the green areas are extracted using satellite imagery analysis for five time periods 1990, 2000, 2010,2020 and 2025 based on the Normalized Difference Vegetation Index (NDVI), which assesses the level of greenness from satellite imagery. In this analysis, green areas are defined as parts of the city that are green for most parts of the year, and include individual trees, forests or forested areas, shrubs, perennial grasses and such other types of long-term vegetation. Waterbodies are not considered as green areas in this assessment. \n\n- Which city has the most green area per capita in each year?\n- Which city has lost the largest percentage of its green area since 1990?\n- Which city has gained the largest percentage of green area since 1990?\n\n\n**Data source:** [Open Spaces and Green Areas](https://data.unhabitat.org/pages/open-spaces-and-green-areas)  \n**Original article:** [Open Spaces and Green Areas](https://data.unhabitat.org/pages/open-spaces-and-green-areas)  \n**Curated by:** Gabriela Palomo-Munoz  \n\n\n## Urban (5,600x10)\n![](index_files/figure-html/unnamed-chunk-2-1.png){width=672}![](index_files/figure-html/unnamed-chunk-2-2.png){width=672}![](index_files/figure-html/unnamed-chunk-2-3.png){width=672}![](index_files/figure-html/unnamed-chunk-2-4.png){width=672}![](index_files/figure-html/unnamed-chunk-2-5.png){width=672}![](index_files/figure-html/unnamed-chunk-2-6.png){width=672}![](index_files/figure-html/unnamed-chunk-2-7.png){width=672}![](index_files/figure-html/unnamed-chunk-2-8.png){width=672}![](index_files/figure-html/unnamed-chunk-2-9.png){width=672}![](index_files/figure-html/unnamed-chunk-2-10.png){width=672}\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
