@@ -1,0 +1,42 @@
+---
+title: Avocado Oil Authenticity
+date: '2026-10-06'
+description: That Avocado Oil Chip You're Eating May Not Be Made With Pure Avocado
+  Oil
+image: https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-10-06/avocado_oil_pca.png
+image-alt: |
+  PCA biplot of fatty acid profiles from oils extracted from processed foods. Samples classified as consistent with authentic avocado oil cluster together on the right, clearly separated from inconsistent samples that cluster near vegetable oil comparators on the left, demonstrating that chemical fingerprinting can reliably distinguish authentic avocado oil from adulterated products.
+---
+
+```{r}
+#| include: false
+source("R/tt_helpers.R")
+```
+
+This week we're exploring avocado oil authenticity data from UC Davis researchers. The dataset includes two studies: one from 2020 examining bottled avocado oils and one from 2026 examining processed foods made with avocado oil. The studies reveal widespread fraud in the avocado oil market. The 2020 study found that 82% of bottled avocado oils were either rancid or adulterated with cheaper oils like soybean oil. Six years later, the problem had spread to processed foods: 89% of chips, mayonnaise, and salad dressings labeled as "made with avocado oil" failed authenticity testing. By contrast, olive oil products (which have been regulated for decades) were overwhelmingly pure.
+
+The bottled oil dataset includes detailed chemical fingerprints (fatty acid profiles, sterol composition, and vitamin E content) that researchers use to detect fraud. The processed foods dataset tracks which specific brands and product categories passed or failed lot-level testing. Together, these datasets tell the story of a premium food category with almost no consumer protection.
+
+> Consumers are increasingly paying a premium for products made with avocado oil or olive oil. They deserve to get what they pay for and food manufacturers deserve confidence that the ingredients they purchase from suppliers are authentic.
+>
+> Selina Wang, Professor of Cooperative Extension, UC Davis Department of Food Science and Technology
+
+- Can you use the fatty acid and sterol profiles to build a classifier that distinguishes pure avocado oil from adulterated samples?
+- Which chemical markers are the strongest indicators of soybean oil vs. sunflower/safflower oil adulteration?
+- How does the failure rate differ across product categories (chips vs. mayo vs. dressings), and why might mayo fare better?
+- Does price correlate with authenticity for bottled oils? Are consumers paying more for genuine products?
+- How do the olive oil results compare to avocado oil results, and what does that tell us about the value of industry regulation?
+
+
+**Data source:** [Authenticity of avocado and olive oils used as ingredients in commercially processed foods](https://linkinghub.elsevier.com/retrieve/pii/S2772502226007274)  
+**Original article:** [That Avocado Oil Chip You're Eating May Not Be Made With Pure Avocado Oil](https://www.ucdavis.edu/food/news/avocado-oil-chip-youre-eating-may-not-be-made-pure-avocado-oil)  
+**Curated by:** Tony Galvan, Golden Dome Data Science  
+
+```{r}
+#| output: asis
+tt_dataset_section("2026-10-06", "avocado_oil_bottles", "Avocado Oil Bottles")
+```
+```{r}
+#| output: asis
+tt_dataset_section("2026-10-06", "avocado_oil_processed_foods", "Avocado Oil Processed Foods")
+```
