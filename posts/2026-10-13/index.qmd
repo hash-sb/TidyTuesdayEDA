@@ -1,0 +1,42 @@
+---
+title: AmphibiaWeb
+date: '2026-10-13'
+description: Pleistocene Forest Stability Predicts Patterns of Frog Diversity in Central
+  Africa
+image: https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-10-13/amphibiaweb_family_phylogeny_2019.png
+image-alt: |
+  A broad phylogenetic family tree diagram for Class Amphibia produced by AmphibiaWeb. The tree branches into three major color-coded orders radiating from a shared ancestor: Gymnophiona (caecilians) in purple at the top, Caudata (salamanders and newts) in orange in the middle section, and Anura (frogs and toads) forming the largest green clade along the bottom. Individual taxonomic families and key clades are labeled at the tips of each branch, illustrating the evolutionary relationships and relative family diversity across the three amphibian orders.
+---
+
+```{r}
+#| include: false
+source("R/tt_helpers.R")
+```
+
+This week we're exploring **Frogs and Toads** through [**AmphibiaWeb**](https://amphibiaweb.org/index.html)'s massive dataset! The quote below is taken from one of the many weekly articles linked in their **Amphibian News!** portal, with entries going all the way back to 2009.  
+
+> Understanding why biodiversity is unevenly distributed is fundamental to ecology and evolution. Should we look to contemporary climate to explain where species diversity is highest, or look deeper into the past? Jongsma et al. (2026) tackled this question in the Lower Guinean Forests of Central Africa... Pleistocene forest stability explained 65-71% of spatial variance in species richness and phylogenetic diversity, which far exceeds contemporary temperature, precipitation, or forest cover.
+> 
+> -- **Greg Jongsma via [AmphibiaWeb News](https://amphibiaweb.org/resources/amphibian_news.html)** (referencing [Jongsma et al., 2026](https://doi.org/10.1002/ece3.73207))
+
+#### Citation
+Jongsma, G. F. M., N. Barve, J. M. Allen, H. L. Owens, and D. C. Blackburn. 2026. "Pleistocene Forest Stability Predicts Patterns of Frog Diversity in Central Africa." *Ecology and Evolution* 16 (3): e73207. [https://doi.org/10.1002/ece3.73207](https://doi.org/10.1002/ece3.73207).
+
+The article above needn't be the only place to draw inspiration. [AmphibiaWeb News](https://amphibiaweb.org/resources/amphibian_news.html) highlights an amphibian-related journal article every week!
+
+Here are a few questions you might answer with your visualisations this week:
+
+- Which frog families contain the highest species counts, and how is diversity distributed across genera?
+- Which countries host the highest numbers of native frog/toad species?
+- How do IUCN status designations (`interntnl_status`) vary across families or geographical regions?
+- Can historical geographic range notes or habitat descriptions explain current regional species clustering?
+
+
+**Data source:** [How to dynamically retrieve an AmphibiaWeb XML species account](https://amphibiaweb.org/api/ws.html)  
+**Original article:** [Pleistocene Forest Stability Predicts Patterns of Frog Diversity in Central Africa](https://onlinelibrary.wiley.com/doi/10.1002/ece3.73207)  
+**Curated by:** Ntobeko Sosibo  
+
+```{r}
+#| output: asis
+tt_dataset_section("2026-10-13", "frogs_and_toads_amphibiaweb", "Frogs And Toads Amphibiaweb")
+```
