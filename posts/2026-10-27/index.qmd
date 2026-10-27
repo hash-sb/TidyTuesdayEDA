@@ -1,0 +1,38 @@
+---
+title: IKEA Sofas and Their Swedish Places
+date: '2026-10-27'
+description: IKEA place names
+image: https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-10-27/ikea_place_names.png
+image-alt: |
+  Map of Sweden with a dot for each place that shares its name with an IKEA sofa or armchair in the Swedish range. Filled dots are sofas, hollow dots armchairs, and ringed dots names used for both. The dots are densest in the south, especially in Skåne, Småland and around Stockholm, and thin out towards the north, where only a handful sit in the interior of Norrland. A red cross marks Älmhult in Småland, where IKEA started. One place, Herråkra in Småland, is highlighted with its name in a blue label.
+---
+
+```{r}
+#| include: false
+source("R/tt_helpers.R")
+```
+
+This week's data is IKEA sofas and armchairs and the Swedish places they are named after. Ingvar Kamprad, IKEA's founder, had dyslexia and found names easier to remember than number codes. Since December 2020, new products get Swedish names only, and sofas and armchairs are named after places in Sweden. KLIPPAN is a town in Skåne and EKTORP a suburb of Stockholm, but many are hamlets of a few houses. 
+
+One table lists every sofa and armchair on ikea.com in 50 countries on 28 September 2026, with prices in local currency and US dollars. The other has the places in Sweden that share each name, from OpenStreetMap.
+
+Sources: product listings from ikea.com; places from OpenStreetMap via Nominatim, © OpenStreetMap contributors (ODbL); exchange rates from the fawazahmed0 currency API (CC0).
+
+- Where in Sweden do the names come from? Do they cluster anywhere, for example around Älmhult in Småland, where IKEA started?
+- Which names are sold in the most countries, and which only in a few?
+- How does the price of the same product (`item_no`) differ between countries in US dollars (`price_usd`)?
+- What kinds of places are they: villages, single farms, lakes, islets?
+
+
+**Data source:** [IKEA product listings, OpenStreetMap Nominatim and fawazahmed0 exchange rates](https://nominatim.openstreetmap.org/)  
+**Original article:** [IKEA place names](https://karaman.is/ikea-place-names)  
+**Curated by:** Georgios Karamanis  
+
+```{r}
+#| output: asis
+tt_dataset_section("2026-10-27", "ikea_places", "Ikea Places")
+```
+```{r}
+#| output: asis
+tt_dataset_section("2026-10-27", "ikea_seating", "Ikea Seating")
+```
