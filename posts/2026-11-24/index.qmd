@@ -1,0 +1,39 @@
+---
+title: Filming Locations
+date: '2026-11-24'
+description: Movie Scene Map
+image: https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-11-24/filming_locations_map.png
+image-alt: |
+  World map titled "Where films and TV series were shot, according to Wikidata". Blue dots mark 7,128 places linked to 12,134 films and series by 20,283 filming location statements, each dot sized by how many productions filmed there. The largest dots are Los Angeles with 1,113 productions and New York City with 1,064, followed by Paris with 508, Vancouver with 491 and Pinewood Studios near London with 451. Europe is densely covered with small dots, as are the coasts of the United States, while Africa, Central Asia and most of South America hold only scattered points.
+---
+
+```{r}
+#| include: false
+source("R/tt_helpers.R")
+```
+
+This week we're exploring filming locations: where films and TV series were shot, as recorded on Wikidata. The data comes from [Movie Scene Map](https://moviescenemap.com/), a free map of filming locations that publishes its files under CC0 at [moviescenemap.com/data](https://moviescenemap.com/data/). This cut keeps only Wikidata's "filming location" (P915) statements: 20,283 links between 12,134 films and series and 7,128 places in 130 countries, from Man Walking Around a Corner (1887) to announced releases. Places read from Wikipedia articles, film archives and city permits, which the site keeps in separate columns, are left out, and so are the video games, anime and manga it places where their stories are set.
+
+> A place is not a scene. P915 records that a production filmed at a place and stops there. Which scene was shot where is not in the data, so it is not in these files either, and it must not be inferred from them.
+
+- Which cities have hosted the most productions, and has that changed from decade to decade?
+- Do TV series film in more places than films do?
+- In which countries are productions filmed at specific spots rather than recorded only at the city level?
+
+
+**Data source:** [Movie Scene Map open data, built from Wikidata](https://moviescenemap.com/data/)  
+**Original article:** [Movie Scene Map](https://moviescenemap.com/)  
+**Curated by:** Flightmussy, maker of Movie Scene Map  
+
+```{r}
+#| output: asis
+tt_dataset_section("2026-11-24", "locations", "Locations")
+```
+```{r}
+#| output: asis
+tt_dataset_section("2026-11-24", "production_locations", "Production Locations")
+```
+```{r}
+#| output: asis
+tt_dataset_section("2026-11-24", "productions", "Productions")
+```
